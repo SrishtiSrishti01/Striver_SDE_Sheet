@@ -1,0 +1,53 @@
+class Solution {
+    public void sortColors(int[] nums) {
+        
+        
+        //BRUTE FORCE APPROACH
+        
+//         int zero = 0;
+//         int one = 0;
+//         int two = 0;
+        
+//         for(int i = 0; i < nums.length; i++) {
+//             if(nums[i] == 0) zero++;
+//             else if(nums[i] == 1) one++;
+//             else two++;
+//         }
+        
+//         int i = 0;
+//         while(zero-->0) {
+//             nums[i++] = 0;
+//         }
+//         while(one-->0) {
+//             nums[i++] = 1;
+//         }
+//         while(two-->0) {
+//             nums[i++] = 2;
+//         }
+        
+        int low = 0;
+        int high = nums.length-1;
+        int i =0;
+        while(i<=high) {
+            if(nums[i] == 0) {
+                swap(nums, i, low);
+                i++;
+                low++;
+            } 
+            else if(nums[i]==2) {
+                swap(nums, i, high);
+                // i++;
+                high--;
+            }
+            else i++;
+          
+        }
+
+    }
+    
+    public void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+}
