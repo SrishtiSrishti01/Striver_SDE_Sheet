@@ -1,0 +1,113 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        
+        //O(m+n) space complexity & time complexity
+//         int i = 0, j = 0, p = 0;
+//         int[] ans = new int[m+n+1];
+        
+//         while(i<m && j<n){
+//             if(nums1[i]<nums2[j]){
+//                 ans[p++] = nums1[i++];
+//             }else {
+//                 ans[p++] = nums2[j++];
+//             }
+//         }
+        
+//         while(i<m) {
+//             ans[p++] = nums1[i++];
+//         }
+        
+//         while(j<n){
+//             ans[p++] = nums2[j++];
+//         }
+        
+//         for(i = 0; i < m+n; i++) {
+//             nums1[i] = ans[i];
+//         }
+        
+        
+        //O(1) space complexity
+        
+//         int i = 0;
+//         int j = 0;
+//         int count = 0;
+//         while(j < n) {
+            
+//             while(i < m+count && nums1[i] <= nums2[j]) {
+//                 i++;
+//             }
+            
+//             shift(nums1, i);
+//             nums1[i++] = nums2[j++];
+//             count++;
+//         }
+        
+        
+//     }
+    
+//     public void shift(int[] arr, int idx) {
+//         int first = arr[0];
+        
+//         for(int i = )
+        
+        
+//     }
+        
+        
+        //O(1) space complexity
+        //BEST APPROACH
+        
+//         if(nums2.length == 0) return;
+//         for(int i = 0; i < m; i++) {
+//             if(nums1[i] > nums2[0]) {
+//                 int temp = nums1[i];
+//                 nums1[i] = nums2[0];
+//                 nums2[0] = temp;
+                
+//                 sort(nums2);
+//             }
+//         }
+//         int k = 0;
+//         for(int i = m; i < nums1.length; i++) {
+//             nums1[i] = nums2[k++];
+//         }
+        
+        
+        //GAP ALGORITHM
+        int p = 0;
+        for(int i = m; i < nums1.length; i++) {
+            nums1[i] = nums2[p++];
+        }
+        
+        int gap = (int)Math.ceil((double)(m+n)/2);
+        while(gap>0) {
+            int i = 0;
+            int k = gap;
+            while(k < (m+n)) {
+                 if(nums1[i] > nums1[k]) {
+                    int temp = nums1[i];
+                    nums1[i] = nums1[k];
+                    nums1[k] = temp;
+
+                }
+                i++;
+                k++;
+            }
+            if(gap==1) gap = 0;
+            else
+            gap = (int)Math.ceil((double)gap/2);
+        }
+        
+    }
+    
+    // public void sort(int[] arr) {
+    //     int first = arr[0];
+    //     int i = 1;
+    //     while(i < arr.length && first>arr[i]) {
+    //         arr[i-1] = arr[i];
+    //         i++;
+    //     }
+    //    arr[i-1] = first;
+    // }
+        
+}
