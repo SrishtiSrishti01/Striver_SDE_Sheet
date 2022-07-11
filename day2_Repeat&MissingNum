@@ -1,0 +1,51 @@
+public class Solution {
+    // DO NOT MODIFY THE ARGUMENTS WITH "final" PREFIX. IT IS READ ONLY
+    public int[] repeatedNumber(final int[] A) {
+        
+        //Math approach to handle overflow
+        // long n = A.length;
+        
+        // long sum = (n * (n+1)) / 2;
+        // long calSum = 0;
+        
+        // long sumSq = (n * (n+1) * (2*n + 1)) / 6;
+        // long calSumSq = 0;
+        
+        // for(int i = 0; i < n; i++) {
+        //     calSum += (long)A[i];
+        //     calSumSq += (long)A[i] * (long)A[i];
+        // }
+        
+        // long a = 0; 
+        // long B = 0;
+        
+        // long diffSum = sum-calSum;
+        // long diffSumSq = sumSq - calSumSq;
+          
+        // long x = diffSumSq / diffSum;
+        
+        // B = (diffSum+x)/2;
+        // a = (x-diffSum)/2;      
+        // int[] ans = new int[2];
+        // ans[0] = (int)a;
+        // ans[1] = (int)B;
+        // return ans;
+        
+        Arrays.sort(A);
+        int[] ans = new int[2];
+        
+        for(int i =0 ; i < A.length-1; i++) {
+            if(A[i] == A[i+1]) {
+                ans[0] = A[i];
+                i++;
+            }
+            if(i < A.length-1 && A[i+1]!=A[i]+1) {
+                ans[1] = A[i]+1;
+            }
+        }
+        
+        return ans;
+    }
+}
+
+
