@@ -1,0 +1,90 @@
+class Solution {
+    public int findDuplicate(int[] nums) {
+        
+        
+        //0(n) space and time complexity
+//         HashSet<Integer> set = new HashSet<>();
+        
+//         for(int i = 0; i < nums.length; i++) {
+//             if(!set.add(nums[i])) return nums[i];
+//         }
+//         return -1;
+        
+        
+        //0(n*n) complexity...TLE
+        // for(int i = 0; i < nums.length-1; i++) {
+        //     for(int j = i+1; j < nums.length; j++) {
+        //         if(nums[i] == nums[j]) return nums[i];
+        //     }
+        // }
+        // return -1;
+       
+        
+        //Floyd's Tortoise and Hare
+        //linked cycle proble reduction
+        //O(n) TC and O(1) SC
+//         int tortoise = nums[0];
+//         int hare = nums[0];
+        
+//         do{
+//             tortoise = nums[tortoise];
+//             hare = nums[nums[hare]];
+//         }while(tortoise!=hare);
+        
+//         hare = nums[0];
+        
+//         while(tortoise!=hare) {
+//             tortoise = nums[tortoise];
+//             hare = nums[hare];
+//         }
+        
+//         return hare;
+        
+        //Bit Manipulation
+        int duplicate = 0;
+        int n = nums.length-1;
+        
+        int max = countMax(nums);
+        int max_bits = countBits(max);
+        
+        for(int i = 0; i < max_bits; i++) {
+            
+            int mask = (1<<i);
+            int bc = 0, nc = 0;
+            for(int j = 0; j <= n; j++) {
+                
+                if((j & mask)>0) {
+                    bc++;
+                }
+                if((nums[j] & mask)>0) {
+                    nc++;
+                }
+            }
+            
+            if(nc>bc) {
+                duplicate |=mask;
+            }
+        }
+        return duplicate;
+    }
+    
+    public int countMax(int[] arr) {
+        
+        int max = 0;
+        for(int i = 0; i < arr.length; i++) {
+            max = Math.max(arr[i], max);
+        }
+        
+        return max;
+    }
+    
+    public int countBits(int num) {
+        int bits = 0;
+        while(num > 0) {
+            bits++;
+            num/=2;
+        }
+        return bits;
+        
+    }
+}
