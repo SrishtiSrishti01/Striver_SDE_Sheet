@@ -1,0 +1,23 @@
+class Solution {
+    int count = 0;
+    public int uniquePaths(int m, int n) {
+        
+       return uniquePathsRec(m-1,n-1, new int[m][n]);
+    }
+    
+    public int uniquePathsRec(int row, int col, int[][] grid) {
+        
+        if(row<0 || col<0) return 0;
+        if(row==0 && col==0) return 1;
+        
+        if(grid[row][col]>0) {
+            return grid[row][col];
+        }
+      
+        grid[row][col] += uniquePathsRec(row-1, col, grid) + uniquePathsRec(row, col-1,grid);
+        
+        return grid[row][col];
+        
+        
+    }
+}
