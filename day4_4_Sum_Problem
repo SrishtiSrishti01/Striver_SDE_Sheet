@@ -1,0 +1,54 @@
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        
+        Arrays.sort(nums);
+        List<List<Integer>> ans = new ArrayList<>();
+        
+        for(int i = 0; i < nums.length-3; i++) {
+            
+            for(int j = i+1; j < nums.length-2; j++) {
+                long sum = nums[i] + nums[j];
+                 List<List<Integer>> list = twoSum(nums, target-sum, j+1, i, j);
+                while( j+1 < nums.length  && nums[j] == nums[j+1]) j++;
+                ans.addAll(list);
+            }
+           
+            while( i+1 < nums.length  && nums[i] == nums[i+1]) i++;
+            
+        }
+        return ans;
+    }
+    
+    public List<List<Integer>> twoSum(int[] nums, long sum, int idx, int one, int two) {
+        
+        int low = idx; 
+        int high = nums.length-1;
+        
+        List<List<Integer>> ans = new ArrayList<>();
+        
+        while(low<high) {
+            long currSum = nums[low]+nums[high];
+            if( currSum== sum) {
+                
+                List<Integer> list = new ArrayList<>();
+                list.add(nums[low]);
+                list.add(nums[high]);
+                list.add(nums[one]);
+                list.add(nums[two]);
+                ans.add(list);
+                while (low < high && nums[low] == nums[low+1]) low++;
+                while (low < high && nums[high] == nums[high-1]) high--;
+                low++;
+                high--;
+                
+            }
+            
+            else if(currSum > sum) high--;
+            else low++; 
+            
+        }
+        
+        return ans;
+        
+    }
+}
