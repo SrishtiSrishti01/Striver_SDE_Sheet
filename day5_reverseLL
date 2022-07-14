@@ -1,0 +1,25 @@
+    public ListNode reverseList(ListNode head) {
+//         if(head==null || head.next == null) return head;
+        
+//         ListNode curr = head;
+//         ListNode prev = head; 
+//         ListNode fur = head.next;
+        
+//         while(fur!=null) {
+//             curr = fur;
+//             fur = fur.next;
+//             curr.next = prev;
+//             prev = curr;
+            
+//         }
+        
+//         head.next = null;
+//         head = curr;
+        
+//         return head;
+        
+        
+        //Recursion
+       return recReverse(head, null, head, head.next);
+       
+    }
