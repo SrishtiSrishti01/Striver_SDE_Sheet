@@ -1,0 +1,35 @@
+ public ListNode detectCycle(ListNode head) {
+        if(head == null) return null;
+        ListNode fast = head;
+        ListNode slow = head;
+        int length = 0;
+        while(fast!=null && fast.next!=null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                slow = slow.next;
+                length++;
+                while(fast!=slow){
+                    slow = slow.next;
+                    length++;
+                }
+                break;
+            }
+            
+        }
+        
+        if(length == 0) return null;
+        
+        ListNode first = head;
+        ListNode second = head;
+        
+        while(length>0){
+            second = second.next;
+            length--;
+        }
+        while(first!=slow){
+            first = first.next;
+            second = second.next;
+        }
+        return first;
+    }
