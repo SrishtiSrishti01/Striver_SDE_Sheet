@@ -1,0 +1,29 @@
+   static class Meetings{
+        int start;
+        int end;
+        public Meetings(int start,int end) {
+            this.start = start;
+            this.end = end;
+        }
+    }
+    
+    public static int maxMeetings(int start[], int end[], int n)
+    {
+        // add your code here
+        Meetings[] meet = new Meetings[n];
+        for(int i = 0; i < n; i++) {
+            meet[i] = new Meetings(start[i], end[i]);
+        }
+        
+        Arrays.sort(meet, (a,b)->a.end-b.end);
+        int count = 1;
+        int prev = meet[0].end;
+        for(int i = 1; i < n; i++) {
+            if(meet[i].start > prev) {
+                count++;
+                prev = meet[i].end;
+            }
+        }
+        
+        return count;
+    }
